@@ -1,0 +1,147 @@
+<html>
+<head>
+    <title>Data Pembelian</title>
+    <style>
+        body {
+            background-color: #cccccc;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        table {
+            margin: 0 auto;
+            border-collapse: collapse;
+            width: 60%;
+        }
+        td {
+            padding: 10px;
+            vertical-align: middle;
+        }
+        input[type="text"] {
+            padding: 5px;
+            width: 100%;
+        }
+        input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        select {
+            padding: 5px;
+            width: 100%;
+        }
+        input[type="submit"], input[type="reset"] {
+            padding: 10px 20px;
+            margin-top: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="reset"] {
+            background-color: #f44336;
+        }
+        hr {
+            margin: 20px 0;
+        }
+    </style>
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const form = document.getElementById('orderForm');
+            const formData = new FormData(form);
+
+            const username = formData.get('Username');
+            const id = formData.get('Id');
+            const server = formData.get('Server');
+            const diamonds = Array.from(formData.getAll('diamonds')).join(', ');
+            const paymentMethod = formData.get('Metode Pembayaran');
+            const contact = formData.get('No.WA/Email');
+
+            const now = new Date();
+            const date = now.toLocaleDateString();
+            const time = now.toLocaleTimeString();
+
+            const receipt = `
+                Order Receipt:
+                -----------------
+                Username: ${username}
+                Id: ${id}
+                Server: ${server}
+                Diamonds: ${diamonds}
+                Payment Method: ${paymentMethod}
+                Contact: ${contact}
+                Date: ${date}
+                Time: ${time}
+            `;
+
+            alert(receipt);
+            form.reset(); // Reset form fields
+        }
+        
+        function handleReset() {
+            window.location.href = 'index.html'; // Redirect to the main page
+        }
+    </script>
+</head>
+<body>
+    <center>
+        <h2><b>Data Pembelian</b></h2>
+    </center>
+    <hr>
+    <form id="orderForm" onsubmit="handleSubmit(event)">
+        <table>
+            <tr>
+                <td>Username</td>
+                <td>: <input type="text" name="Username" size="20"></td>
+            </tr>
+            <tr>
+                <td>Id</td>
+                <td>: <input type="text" name="Id" size="20"></td>
+            </tr>
+            <tr>
+                <td>Server</td>
+                <td>: <input type="text" name="Server" size="20"></td>
+            </tr>
+            <tr>
+                <td>Diamonds</td>
+                <td>
+                    <input type="checkbox" name="diamonds" value="86"> 86 Diamonds <br/>
+                    <input type="checkbox" name="diamonds" value="172"> 172 Diamonds <br/>
+                    <input type="checkbox" name="diamonds" value="257"> 257 Diamonds <br/>
+                    <input type="checkbox" name="diamonds" value="344"> 344 Diamonds <br/>
+                    <input type="checkbox" name="diamonds" value="429"> 429 Diamonds <br/>
+                    <input type="checkbox" name="diamonds" value="514"> 514 Diamonds <br/>
+                    <input type="checkbox" name="diamonds" value="600"> 600 Diamonds <br/>
+                    <input type="checkbox" name="diamonds" value="706"> 706 Diamonds <br/>
+                    <input type="checkbox" name="diamonds" value="878"> 878 Diamonds <br/>
+                    <input type="checkbox" name="diamonds" value="963"> 963 Diamonds 
+                </td>
+            </tr>
+            <tr>
+                <td>Metode Pembayaran</td>
+                <td>
+                    : <select size="1" name="Metode Pembayaran">
+                        <option>BNI</option>
+                        <option>BRI</option>
+                        <option>BCA</option>
+                        <option>BTN</option>
+                        <option>MANDIRI</option>
+                        <option>BANK INDONESIA</option>
+                        <option>DANA</option>
+                        <option>OVO</option>
+                        <option>SHOPEE-PAY</option>
+                        <option>ALFAMART</option>
+                        <option>INDOMARET</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>No.WA/Email</td>
+                <td>: <input type="text" name="No.WA/Email" size="20"></td>
+            </tr>
+        </table>
+        <hr>
+        <input type="submit" value="Order Now">
+        <input type="reset" value="Reset" >
+    </form>
+</body>
+</html>
